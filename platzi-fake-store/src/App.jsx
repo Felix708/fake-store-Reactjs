@@ -1,33 +1,12 @@
 import BannerComponent from "./components/BannerComponent";
 import WrapperComponent from "./components/WrapperComponent";
 import { Button } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 
 export default function App() {
-  const [categoryProduct, setCategoryProduct] = useState([
-    {
-      id: 1,
-      name: "Baju",
-      image: "https://tse4.mm.bing.net/th/id/OIP.YQGr_YZogs-okin0pQum2gHaII?cb=defcache2defcache=1&rs=1&pid=ImgDetMain&o=7&rm=3",
-    },
-    {
-      id: 2,
-      name: "Celana",
-      image: "https://y2kdream.com/cdn/shop/files/Y2K-Distressed-Low-Waist-Print-Baggy-Jeans-2.webp?v=1721224778&width=800",
-    },
-    {
-      id: 3,
-      name: "Sandal",
-      image: "https://down-id.img.susercontent.com/file/id-11134207-7r98t-lxjj0lk4irsae3",
-    },
-    {
-      id: 4,
-      name: "Aksesoris",
-      image: "https://down-id.img.susercontent.com/file/id-11134207-7rash-m30jok92vxslb2",
-    },
-  ]);
+  const [categoryProduct, setCategoryProduct] = useState([]);
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -35,7 +14,7 @@ export default function App() {
       price: 50,
       images: [
         "https://th.bing.com/th/id/OIP.s5A0TZ7sEwdHb5g42F7nMwHaHU?o=7&cb=defcache2rm=3&defcache=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-      ], 
+      ],
     },
     {
       id: 2,
@@ -63,6 +42,27 @@ export default function App() {
     },
   ]);
 
+  async function getDataCategories() {
+    const url = "https://api.escuelajs.co/api/v1/categories";
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      // isi data categoryProduct diatas yang awalnya useState kosong jdi dari API
+      setCategoryProduct(result);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  // memanggil data API pas baru dibuka halamannya dgn useEffect
+  useEffect(() => {
+    getDataCategories();
+  }, []);
+
   return (
     // untuk memanggil lebih dari 1 comp, harus dibungkus <> </> atau <div> <div/>
     <div className="">
@@ -79,9 +79,9 @@ export default function App() {
           <h1 className="text-2xl font-bold">Daftar Produk Populer</h1>
           {/* pindah halaman(pengganti a href): Link to */}
           <Link to="/Products">
-          <Button className="bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 text-white hover:bg-gradient-to-br focus:ring-cyan-300 dark:focus:ring-cyan-800">
-            Selengkapnya
-          </Button>
+            <Button className="bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 text-white hover:bg-gradient-to-br focus:ring-cyan-300 dark:focus:ring-cyan-800">
+              Selengkapnya
+            </Button>
           </Link>
         </div>
       </WrapperComponent>
