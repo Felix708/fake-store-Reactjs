@@ -10,7 +10,7 @@ export default function App() {
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   async function getDataCategories() {
     const url = "https://api.escuelajs.co/api/v1/categories";
     try {
@@ -18,7 +18,7 @@ export default function App() {
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
-
+      
       const result = await response.json();
       // isi data categoryProduct diatas yang awalnya useState kosong jdi dari API
       setCategoryProduct(result.slice(0, 4));
@@ -34,7 +34,7 @@ export default function App() {
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
-
+      
       const result = await response.json();
       // isi data categoryProduct diatas yang awalnya useState kosong jdi dari API
       setProducts(result.slice(0, 4));
@@ -43,7 +43,7 @@ export default function App() {
       console.error(error.message);
     }
   }
-
+  
   // memanggil data API pas baru dibuka halamannya dgn useEffect
   useEffect(() => {
     getDataCategories();
@@ -74,7 +74,7 @@ export default function App() {
                 <h1 className="text-2xl font-bold">Daftar Produk Populer</h1>
                 {/* pindah halaman(pengganti a href): Link to */}
                 <Link to="/Products">
-                  <Button className="bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 text-white hover:bg-gradient-to-br focus:ring-cyan-300 dark:focus:ring-cyan-800">
+                  <Button className="bg-linear-to-r from-cyan-400 via-cyan-500 to-cyan-600 text-white hover:bg-linear-to-br focus:ring-cyan-300 dark:focus:ring-cyan-800">
                     Selengkapnya
                   </Button>
                 </Link>

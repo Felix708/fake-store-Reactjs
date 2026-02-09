@@ -12,14 +12,17 @@ import {
 } from "flowbite-react";
 import imgLogo from "../assets/Epstore.png";
 import { FcPaid } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 export default function NavbarComponent() {
     return (
         <Navbar fluid rounded>
-            <NavbarBrand href="https://flowbite-react.com">
-                <img src={imgLogo} className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Epstore Fake Store</span>
-            </NavbarBrand>
+            <Link to="/">
+                <NavbarBrand>
+                    <img src={imgLogo} className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
+                    <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Epstore Fake Store</span>
+                </NavbarBrand>
+            </Link>
             <div className="flex md:order-2">
                 <FcPaid className="text-4xl me-2 pt-1" />
                 <Dropdown
@@ -30,10 +33,12 @@ export default function NavbarComponent() {
                     }
                 >
                     <DropdownHeader>
-                        <span className="block text-sm">Bonnie Green</span>
-                        <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+                        <span className="block text-sm">Platzi Fake Store Web</span>
+                        <span className="block truncate text-sm font-medium">Update Beta 1.0</span>
                     </DropdownHeader>
-                    <DropdownItem>Dashboard</DropdownItem>
+                    <Link to="/Profiles">
+                        <DropdownItem>Profile</DropdownItem>
+                    </Link>
                     <DropdownItem>Settings</DropdownItem>
                     <DropdownItem>Earnings</DropdownItem>
                     <DropdownDivider />
