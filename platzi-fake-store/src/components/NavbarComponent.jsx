@@ -20,7 +20,7 @@ export default function NavbarComponent() {
             <Link to="/">
                 <NavbarBrand>
                     <img src={imgLogo} className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
-                    <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Epstore Fake Store</span>
+                    <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Epstein's Goodies</span>
                 </NavbarBrand>
             </Link>
             <div className="flex md:order-2">
@@ -40,7 +40,9 @@ export default function NavbarComponent() {
                         <DropdownItem>Profile</DropdownItem>
                     </Link>
                     <DropdownItem>Settings</DropdownItem>
-                    <DropdownItem>Earnings</DropdownItem>
+                    <Link to="/Rankings">
+                        <DropdownItem>Rankings</DropdownItem>
+                    </Link>
                     <DropdownDivider />
                     <DropdownItem>Sign out</DropdownItem>
                 </Dropdown>
