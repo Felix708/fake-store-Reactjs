@@ -3,8 +3,6 @@ import App from "../App";
 import Products from "../pages/Products";
 import Template from "../Template";
 import Profiles from "../pages/Profiles";
-import Rangkings from "../pages/Rangkings";
-
 export const router = createBrowserRouter([
     {
         // 
