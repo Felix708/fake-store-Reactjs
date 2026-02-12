@@ -3,6 +3,7 @@ import App from "../App";
 import Products from "../pages/Products";
 import Template from "../Template";
 import Profiles from "../pages/Profiles";
+import CategoryProducts from "../pages/CategoryProducts";
 export const router = createBrowserRouter([
     {
         // 
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
             {
                 path: "/products",
                 element: <Products />,
+            },
+            {
+                path: "/products/category/:categoryId",
+                element: <CategoryProducts />,
             },
             {
                 path: "/profiles",
