@@ -6,15 +6,28 @@ import {
     DropdownItem,
     Navbar,
     NavbarBrand,
-    NavbarCollapse,
-    NavbarLink,
     NavbarToggle,
+    Button
 } from "flowbite-react";
 import imgLogo from "../assets/Epstore.png";
 import { FcPaid } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+
 
 export default function NavbarComponent() {
+    // get the object provided by AuthContext and pull out the boolean/token
+    const { isLoggedin, logout } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    function logoutProcess(){
+        // panggil func dari context
+        logout();
+        // context tdk bisa menggunakan redirect, jadi menggunakan navigate
+        navigate("/login");
+    }
+
     return (
         <Navbar fluid rounded>
             <Link to="/">
@@ -24,7 +37,9 @@ export default function NavbarComponent() {
                 </NavbarBrand>
             </Link>
             <div className="flex md:order-2">
-                <FcPaid className="text-4xl me-2 pt-1" />
+                <Link to="/cart">
+                    <FcPaid className="text-4xl me-2 pt-1" />
+                </Link>
                 <Dropdown
                     arrowIcon={false}
                     inline
@@ -47,6 +62,13 @@ export default function NavbarComponent() {
                     <DropdownItem>Sign out</DropdownItem>
                 </Dropdown>
                 <NavbarToggle />
+                {
+                isLoggedin != null && (
+                    <Button color="red" className="ms-3" onClick={logoutProcess}>
+                        Logout
+                    </Button>
+                )
+                }
             </div>
         </Navbar>
     );
