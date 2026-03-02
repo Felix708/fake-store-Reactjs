@@ -14,7 +14,11 @@ export default function CategoryProducts() {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const onPageChange = (page) => setCurrentPage(page);
+    const onPageChange = (page) => {
+        setCurrentPage(page);
+        // panggil ulang data setiap angka  pagination berubah
+        getCategoryProducts("https://api.escuelajs.co/api/v1/products/?categoryId=" + categoryId + "&limit=8" + "&offset=" + currentPage);
+    };
 
     function processSearch(event) {
         // ambil data value dari input, simpan di state search
@@ -60,7 +64,7 @@ export default function CategoryProducts() {
             console.error(error.message);
         }
     }
-    async function getCategoryProducts(url = "https://api.escuelajs.co/api/v1/products/?categoryId=" + categoryId) {
+    async function getCategoryProducts(url = "https://api.escuelajs.co/api/v1/products/?categoryId=" + categoryId + "&limit=8" + "&offset=" + currentPage) {
         try {
             const response = await fetch(url);
             if (!response.ok) {
