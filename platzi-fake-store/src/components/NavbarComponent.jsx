@@ -14,11 +14,13 @@ import { FcPaid } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import { CartContext } from "../contexts/CartContext";
 
 
 export default function NavbarComponent() {
     // get the object provided by AuthContext and pull out the boolean/token
     const { isLoggedin, logout } = useContext(AuthContext);
+    const {cart} = useContext(CartContext);
 
     const navigate = useNavigate();
     function logoutProcess(){

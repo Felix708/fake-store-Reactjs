@@ -86,11 +86,6 @@ export default function CategoryProducts() {
 
     return (
         <div className="m-5">
-            <h1 className="font-bold text-2xl ml-10 my-3">Category Product {category.name}</h1>
-            <div className="flex justify-between mb-10 px-10">
-                <SearchComponent processSearch={processSearch} />
-                <SortDropdown sortProducts={sortProducts} />
-            </div>
             {
                 loading === true ? (
                     <div className="flex justify-center">
@@ -98,9 +93,18 @@ export default function CategoryProducts() {
                         <p className="font-bold ms-2">Loading data...</p>
                     </div>
                 ) : (
-                    <div className="">
-                        <WrapperComponent data={products} type={"products"}></WrapperComponent>
-                        <PaginationComponent onPageChange={onPageChange} currentPage={currentPage}/>
+                    <div className="container mx-auto px-4 py-8">
+                        <div className="justify-between mb-10 px-10">
+                            <h1 className="text-2xl font-bold mb-4">Category Product {category.name}</h1>
+                            <div className="flex justify-evenly mb-10 gap-7">
+                                <SearchComponent processSearch={processSearch} />
+                                <SortDropdown sortProducts={sortProducts} />
+                            </div>
+                            <div className="">
+                                <WrapperComponent data={products} type={"products"}></WrapperComponent>
+                                <PaginationComponent onPageChange={onPageChange} currentPage={currentPage} />
+                            </div>
+                        </div>
                     </div>
                 )
             }

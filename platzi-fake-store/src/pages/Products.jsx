@@ -66,16 +66,16 @@ export default function Products() {
                         <div className="justify-between mb-10 px-10">
                             <h1 className="text-2xl font-bold mb-4">Daftar Produk</h1>
                             <div className="flex justify-evenly mb-10 gap-7">
-                            <SearchComponent processSearch={processSearch} />
-                            <SortDropdown  sortProducts={sortProducts}/>
+                                <SearchComponent processSearch={processSearch} />
+                                <SortDropdown sortProducts={sortProducts} />
                             </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {products.map((product) => (
-                                <CardCommerce key={product.id} product={product} />
-                            ))}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {products.map((product) => (
+                                    <CardCommerce key={product.id} product={product} />
+                                ))}
+                            </div>
                         </div>
-                        </div>
-                        <PaginationComponent onPageChange={onPageChange} currentPage={currentPage}/>
+                        <PaginationComponent onPageChange={onPageChange} currentPage={currentPage} />
                     </div>
                 )
             }

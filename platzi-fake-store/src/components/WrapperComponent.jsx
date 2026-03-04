@@ -1,7 +1,20 @@
 import CardComponent from "./CardComponent";
 import CardCommerce from "./CardCommerce";
+import { useState } from "react";
+import ModalCartComponent from "./ModalCartComponent";
 
 export default function WrapperComponent({ data, type, children }) {
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedItem, setSelectedItem] = useState({});
+
+    function onCloseModal() {
+        setOpenModal(false);
+    }
+    function handleAddToCart(item) {
+        setOpenModal(true);
+        setSelectedItem(item);
+    }
+
     return (
         <div className="w-4xl block mx-auto">
             {children}
@@ -10,14 +23,17 @@ export default function WrapperComponent({ data, type, children }) {
                type: jenis card yang mau ditampilakn, cardcomp atau cardcommerce
                children: tambahan bagian judul kalau perlu} */}
                 {
-                    data.map((item, index) => 
+                    data.map((item, index) =>
                         type == "categoryProduct" ? (
-                        <CardComponent categoryProduct={item} key={index} />
-                    ) : (
-                    <CardCommerce product={item} key={index} />
-                )
+                            <CardComponent categoryProduct={item} key={index} />
+                        ) : (
+                            <>
+                                <CardCommerce product={item} key={index} handleAddToCart={handleAddToCart} />
+                            </>
+                        )
                     )}
             </div>
+            <ModalCartComponent openModal={openModal} onCloseModal={onCloseModal} item={selectedItem} />
         </div>
     );
 }
