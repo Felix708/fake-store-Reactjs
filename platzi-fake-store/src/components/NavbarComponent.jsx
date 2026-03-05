@@ -7,7 +7,8 @@ import {
     Navbar,
     NavbarBrand,
     NavbarToggle,
-    Button
+    Button,
+    Badge
 } from "flowbite-react";
 import imgLogo from "../assets/Epstore.png";
 import { FcPaid } from "react-icons/fc";
@@ -40,6 +41,7 @@ export default function NavbarComponent() {
             </Link>
             <div className="flex md:order-2">
                 <Link to="/cart">
+                <Badge color="failure" className="rounded-full absolute top-3 right-4xl">{cart.length}</Badge>
                     <FcPaid className="text-4xl me-2 pt-1" />
                 </Link>
                 <Dropdown

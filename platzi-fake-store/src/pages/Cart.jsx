@@ -1,9 +1,10 @@
+import CardCartComponent from "../components/CardCartComponent"
 
+export default function Cart({ openModalConfirmation, onCloseModalConfirmation }) {
 
-export default function Cart() {
     return (
-        <div className="text-center text-2xl font-bold">
-            <h1>Cart Page</h1>
+        <div className="flex items-center justify-center">
+            <CardCartComponent type="cart" openModalConfirmation={openModalConfirmation} onCloseModalConfirmation={onCloseModalConfirmation} />
         </div>
     )
 }

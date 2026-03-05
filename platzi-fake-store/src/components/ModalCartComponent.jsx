@@ -16,7 +16,7 @@ export default function ModalCartComponent({ openModal, onCloseModal, item }) {
         }
         if(type == "-"){
             setQty(qty - 1);
-        }
+        } 
         if(type == "+"){
             setQty(qty + 1);
         }
@@ -24,11 +24,11 @@ export default function ModalCartComponent({ openModal, onCloseModal, item }) {
 
     const {addtoCart} = useContext(CartContext);
 
-    const {isLogin} = useContext(AuthContext);
+    const {isLoggedin} = useContext(AuthContext);
     const navigate = useNavigate();
 
     function handleAddToCart(){
-        if(!isLogin){
+        if(!isLoggedin){
             navigate("/login");
             return null;
         }

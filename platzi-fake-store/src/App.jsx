@@ -1,14 +1,18 @@
 import BannerComponent from "./components/BannerComponent";
 import WrapperComponent from "./components/WrapperComponent";
+import ModalConfirmation from "./components/ModalConfirmation";
 import { Button, Spinner } from "flowbite-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CartContext } from "./contexts/CartContext";
 
 
 export default function App() {
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
   
   async function getDataCategories() {
     const url = "https://api.escuelajs.co/api/v1/categories";
@@ -43,11 +47,19 @@ export default function App() {
     }
   }
   
+  const {setOpenModalConfirmation, openModalConfirmation} = useContext(CartContext);
+
+  
   // memanggil data API pas baru dibuka halamannya dgn useEffect
   useEffect(() => {
     getDataCategories();
     getDataProducts();
+    console.log(openModalConfirmation)
   }, []);
+
+      function onCloseModalConfirmation() {
+        setOpenModalConfirmation(false);
+    }
 
   return (
     // untuk memanggil lebih dari 1 comp, harus dibungkus <> </> atau <div> <div/>
@@ -79,6 +91,7 @@ export default function App() {
                 </Link>
               </div>
             </WrapperComponent>
+            <ModalConfirmation openModalConfirmation={openModalConfirmation} onCloseModalConfirmation={onCloseModalConfirmation} />
           </div>
         )
       }
